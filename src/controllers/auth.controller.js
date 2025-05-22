@@ -4,7 +4,7 @@ const { getRepository } = require('typeorm');
 const { User } = require('../entities/User');
 
 exports.signup = async (req, res) => {
-    const { username, password } = req.body;
+    const { username, password, role } = req.body; // ⬅️ take role from request
     try {
       const userRepo = getRepository(User);
       const existing = await userRepo.findOne({ where: { username } });
@@ -14,7 +14,7 @@ exports.signup = async (req, res) => {
       const user = userRepo.create({
         username,
         password: hashedPassword,
-        role: 'Employee' 
+        role: role || 'Employee' // ⬅️ default fallback if not passed
       });
   
       await userRepo.save(user);
@@ -23,6 +23,7 @@ exports.signup = async (req, res) => {
       res.status(500).json({ error: err.message });
     }
   };
+  
   
   exports.login = async (req, res) => {
     const { username, password } = req.body;
