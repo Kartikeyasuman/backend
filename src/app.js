@@ -8,7 +8,7 @@ const app = express();
 
 // ✅ CORS configuration for React frontend
 app.use(cors({
-  origin: 'https://backend-3-d6a8.onrender.com',
+  origin: 'https://frontend-olive-one-27.vercel.app',
   credentials: true
 }));
 
