@@ -14,7 +14,7 @@ exports.signup = async (req, res) => {
       const user = userRepo.create({
         username,
         password: hashedPassword,
-        role: 'Employee' // ✅ this line fixes your error
+        role: 'Employee' 
       });
   
       await userRepo.save(user);
